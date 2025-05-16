@@ -1,6 +1,6 @@
 import { useState } from "react"
 // import useOutletContext
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom"
 
 function DirectorForm() {
   const [name, setName] = useState("")
@@ -8,6 +8,9 @@ function DirectorForm() {
 
   {/* destructure addBookstore from useOutletContext */}
   const { addDirector } = useOutletContext()
+
+  // call useNavigate hook to get navigate function
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -26,9 +29,11 @@ function DirectorForm() {
     .then(data => {
         console.log(data)
         // handle context/state changes
-        // navigate to newly created director page
         //* use addDirector to update state */
         addDirector(data)
+        // navigate to newly created director page
+        navigate(`/directors/${data.id}`)
+        
     })
     .catch(console.log)
   }

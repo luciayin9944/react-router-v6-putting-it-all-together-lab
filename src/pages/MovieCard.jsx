@@ -18,7 +18,7 @@ function MovieCard() {
   if (!director) return <h2>Director not found.</h2>
 
   // find movie from bookId and director
-  const movie = director.movies.find(b => b.id === movieId)
+  const movie = director.movies.find(m => m.id === movieId)
   
   if (!movie) return <h2>Movie not found.</h2>
 
