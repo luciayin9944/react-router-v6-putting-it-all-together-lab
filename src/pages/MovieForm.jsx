@@ -1,13 +1,22 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid'
+// import useOutletContext and useParams
+import { useOutletContext, useParams } from "react-router-dom"
 
 function MovieForm() {
   const [title, setTitle] = useState("")
   const [time, setTime] = useState("")
   const [genres, setGenres] = useState("")
+  // get bookstore id from params
+  const {id} = useParams()
 
   // Replace me
-  const director = null
+  // const director = null
+
+  // destructure directors and updateDirector from outlet context
+  const { directors, updateDirector } = useOutletContext()
+  // find director using id from all directors
+  const director = directors.find(d => d.id===id)
   
   if (!director) { return <h2>Director not found.</h2>}
 
@@ -34,6 +43,7 @@ function MovieForm() {
       console.log(data)
       // handle context/state changes
       // navigate to newly created movie page
+      updateDirector(data)
     })
     .catch(console.log)
   }
